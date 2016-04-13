@@ -37,16 +37,16 @@
             android:layout_width="@dimen/buttom_size"
             android:layout_height="@dimen/buttom_size"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_auto_fix_white_48dp"
-            android:background="@color/colorButtonSketch"/>
+            android:background="@color/colorButtonSketch"
+            android:src="@drawable/ic_auto_fix_white_48dp"/>
 
         <ImageButton
             android:id="@+id/button_merge_image"
             android:layout_width="@dimen/buttom_size"
             android:layout_height="@dimen/buttom_size"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_burst_mode_white_48dp"
-            android:background="@color/colorButtonMergePhoto"/>
+            android:background="@color/colorButtonMergePhoto"
+            android:src="@drawable/ic_burst_mode_white_48dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -60,16 +60,16 @@
             android:layout_width="@dimen/buttom_size"
             android:layout_height="@dimen/buttom_size"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_photo_camera_white_48dp"
-            android:background="@color/colorButtonTakePhoto"/>
+            android:background="@color/colorButtonTakePhoto"
+            android:src="@drawable/ic_photo_camera_white_48dp"/>
 
         <ImageButton
             android:id="@+id/button_make_video"
             android:layout_width="@dimen/buttom_size"
             android:layout_height="@dimen/buttom_size"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_settings_input_svideo_white_48dp"
-            android:background="@color/colorButtonMakeVideo"/>
+            android:background="@color/colorButtonMakeVideo"
+            android:src="@drawable/ic_settings_input_svideo_white_48dp"/>
     </LinearLayout>
 
 </RelativeLayout>

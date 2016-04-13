@@ -9,8 +9,8 @@ import android.media.effect.EffectFactory;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -24,7 +24,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 public class EditImageActivity extends AppCompatActivity implements GLSurfaceView.Renderer,
-    View.OnClickListener{
+    View.OnClickListener {
     private GLSurfaceView mEffectView;
     private int[] mTextures = new int[2];
     private EffectContext mEffectContext;
@@ -34,13 +34,16 @@ public class EditImageActivity extends AppCompatActivity implements GLSurfaceVie
     private int mImageHeight;
     private boolean mInitialized = false;
     private int mCurrentEffect;
+
     public void setCurrentEffect(int effect) {
         mCurrentEffect = effect;
     }
-    Button mButNone, mButAutofix,mButbw, mButbrightness, mButcontrast, mButcrossprocess,
-        mButdocumentary, mButduotone, mButfilllight,mButfisheye, mButflipvert, mButfliphor,
+
+    Button mButNone, mButAutofix, mButbw, mButbrightness, mButcontrast, mButcrossprocess,
+        mButdocumentary, mButduotone, mButfilllight, mButfisheye, mButflipvert, mButfliphor,
         mButgrain, mButlomoish, mButnegative, mButposterize, mButrotate, mButsaturate, mButsepia,
         mButGray, mButsharpen, mButtemperature, mButtint, mButvignette;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,53 +57,53 @@ public class EditImageActivity extends AppCompatActivity implements GLSurfaceVie
     }
 
     private void initButton() {
-        mButNone=(Button)findViewById(R.id.none);
+        mButNone = (Button) findViewById(R.id.none);
         mButNone.setOnClickListener(this);
-        mButAutofix=(Button)findViewById(R.id.autofix);
+        mButAutofix = (Button) findViewById(R.id.autofix);
         mButAutofix.setOnClickListener(this);
-        mButbw=(Button)findViewById(R.id.bw);
+        mButbw = (Button) findViewById(R.id.bw);
         mButbw.setOnClickListener(this);
-        mButbrightness=(Button)findViewById(R.id.brightness);
+        mButbrightness = (Button) findViewById(R.id.brightness);
         mButbrightness.setOnClickListener(this);
-        mButcontrast=(Button)findViewById(R.id.contrast);
+        mButcontrast = (Button) findViewById(R.id.contrast);
         mButcontrast.setOnClickListener(this);
-        mButcrossprocess=(Button)findViewById(R.id.crossprocess);
+        mButcrossprocess = (Button) findViewById(R.id.crossprocess);
         mButcrossprocess.setOnClickListener(this);
-        mButdocumentary=(Button)findViewById(R.id.documentary);
+        mButdocumentary = (Button) findViewById(R.id.documentary);
         mButdocumentary.setOnClickListener(this);
-        mButduotone=(Button)findViewById(R.id.duotone);
+        mButduotone = (Button) findViewById(R.id.duotone);
         mButduotone.setOnClickListener(this);
-        mButfilllight=(Button)findViewById(R.id.filllight);
+        mButfilllight = (Button) findViewById(R.id.filllight);
         mButfilllight.setOnClickListener(this);
-        mButfisheye=(Button)findViewById(R.id.fisheye);
+        mButfisheye = (Button) findViewById(R.id.fisheye);
         mButfisheye.setOnClickListener(this);
-        mButflipvert=(Button)findViewById(R.id.flipvert);
+        mButflipvert = (Button) findViewById(R.id.flipvert);
         mButflipvert.setOnClickListener(this);
-        mButfliphor=(Button)findViewById(R.id.fliphor);
+        mButfliphor = (Button) findViewById(R.id.fliphor);
         mButfliphor.setOnClickListener(this);
-        mButgrain=(Button)findViewById(R.id.grain);
+        mButgrain = (Button) findViewById(R.id.grain);
         mButgrain.setOnClickListener(this);
-        mButlomoish=(Button)findViewById(R.id.lomoish);
+        mButlomoish = (Button) findViewById(R.id.lomoish);
         mButlomoish.setOnClickListener(this);
-        mButnegative=(Button)findViewById(R.id.negative);
+        mButnegative = (Button) findViewById(R.id.negative);
         mButnegative.setOnClickListener(this);
-        mButposterize=(Button)findViewById(R.id.posterize);
+        mButposterize = (Button) findViewById(R.id.posterize);
         mButposterize.setOnClickListener(this);
-        mButrotate=(Button)findViewById(R.id.rotate);
+        mButrotate = (Button) findViewById(R.id.rotate);
         mButrotate.setOnClickListener(this);
-        mButsaturate=(Button)findViewById(R.id.saturate);
+        mButsaturate = (Button) findViewById(R.id.saturate);
         mButsaturate.setOnClickListener(this);
-        mButsepia=(Button)findViewById(R.id.sepia);
+        mButsepia = (Button) findViewById(R.id.sepia);
         mButsepia.setOnClickListener(this);
-        mButGray=(Button)findViewById(R.id.grayscale);
+        mButGray = (Button) findViewById(R.id.grayscale);
         mButGray.setOnClickListener(this);
-        mButsharpen=(Button)findViewById(R.id.sharpen);
+        mButsharpen = (Button) findViewById(R.id.sharpen);
         mButsharpen.setOnClickListener(this);
-        mButtemperature=(Button)findViewById(R.id.temperature);
+        mButtemperature = (Button) findViewById(R.id.temperature);
         mButtemperature.setOnClickListener(this);
-        mButtint=(Button)findViewById(R.id.tint);
+        mButtint = (Button) findViewById(R.id.tint);
         mButtint.setOnClickListener(this);
-        mButvignette=(Button)findViewById(R.id.vignette);
+        mButvignette = (Button) findViewById(R.id.vignette);
         mButvignette.setOnClickListener(this);
     }
 
@@ -115,6 +118,7 @@ public class EditImageActivity extends AppCompatActivity implements GLSurfaceVie
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
         GLToolbox.initTexParams();
     }
+
     private void initEffect() {
         EffectFactory effectFactory = mEffectContext.getFactory();
         if (mEffect != null) {
@@ -236,17 +240,19 @@ public class EditImageActivity extends AppCompatActivity implements GLSurfaceVie
                 break;
         }
     }
+
     private void applyEffect() {
         mEffect.apply(mTextures[0], mImageWidth, mImageHeight, mTextures[1]);
     }
+
     private void renderResult() {
         if (mCurrentEffect != R.id.none) {
             mTexRenderer.renderTexture(mTextures[1]);
-        }
-        else {
+        } else {
             mTexRenderer.renderTexture(mTextures[0]);
         }
     }
+
     @Override
     public void onDrawFrame(GL10 gl) {
         if (!mInitialized) {
@@ -261,21 +267,25 @@ public class EditImageActivity extends AppCompatActivity implements GLSurfaceVie
         }
         renderResult();
     }
+
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         if (mTexRenderer != null) {
             mTexRenderer.updateViewSize(width, height);
         }
     }
+
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
         return true;
     }
+
     @Override
     public void onClick(View v) {
         setCurrentEffect(v.getId());

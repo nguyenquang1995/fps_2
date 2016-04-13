@@ -15,9 +15,11 @@ import com.framgia.project1.fps_2_project.R;
 public class ImageSlideAdapter extends PagerAdapter {
     public static final int IMAGE_COUNT = 5;
     private Context mContext;
+
     public ImageSlideAdapter(Context context) {
         this.mContext = context;
     }
+
     @Override
     public int getCount() {
         return IMAGE_COUNT;
@@ -39,6 +41,6 @@ public class ImageSlideAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View)object);
+        container.removeView((View) object);
     }
 }
