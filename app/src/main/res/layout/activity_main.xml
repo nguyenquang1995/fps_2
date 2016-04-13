@@ -1,35 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.framgia.project1.fps_2_project.MainActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.activity.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:id="@+id/img_slideshow_layout"
         android:layout_width="match_parent"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_main"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:layout_marginTop="@dimen/margin_base"
+        android:background="@drawable/img_border">
 
-</android.support.design.widget.CoordinatorLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_pager_height"/>
+
+        <com.framgia.project1.fps_2_project.ui.widget.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_pager"
+            android:padding="@dimen/margin_base"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_slideshow_layout"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_sketch"
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="0.5"
+            android:src="@drawable/ic_auto_fix_white_48dp"
+            android:background="@color/colorButtonSketch"/>
+
+        <ImageButton
+            android:id="@+id/button_merge_image"
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="0.5"
+            android:src="@drawable/ic_burst_mode_white_48dp"
+            android:background="@color/colorButtonMergePhoto"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_take_photo"
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="0.5"
+            android:src="@drawable/ic_photo_camera_white_48dp"
+            android:background="@color/colorButtonTakePhoto"/>
+
+        <ImageButton
+            android:id="@+id/button_make_video"
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="0.5"
+            android:src="@drawable/ic_settings_input_svideo_white_48dp"
+            android:background="@color/colorButtonMakeVideo"/>
+    </LinearLayout>
+
+</RelativeLayout>
