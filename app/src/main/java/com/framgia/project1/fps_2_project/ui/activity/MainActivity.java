@@ -1,17 +1,18 @@
 package com.framgia.project1.fps_2_project.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.framgia.project1.fps_2_project.R;
 import com.framgia.project1.fps_2_project.ui.adapter.ImageSlideAdapter;
 import com.framgia.project1.fps_2_project.ui.widget.CirclePageIndicator;
 
 public class MainActivity extends AppCompatActivity {
-
     private ViewPager mViewPager;
     private CirclePageIndicator mIndicator;
     @Override
@@ -25,8 +26,21 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(new ImageSlideAdapter(MainActivity.this));
         mIndicator = (CirclePageIndicator)findViewById(R.id.indicator);
         mIndicator.setViewPager(mViewPager);
+        findViewById(R.id.button_take_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivity(cameraIntent);
+            }
+        });
+        findViewById(R.id.button_sketch).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this, EditImageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -45,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
