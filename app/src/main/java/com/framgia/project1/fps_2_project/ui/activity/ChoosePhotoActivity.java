@@ -1,10 +1,12 @@
 package com.framgia.project1.fps_2_project.ui.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -29,6 +31,7 @@ public class ChoosePhotoActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private PhotoAdapter mPhotoAdapter;
     private ArrayList<PhotoModel> mListImageAll = new ArrayList();
+    private ProgressDialog mProgressDialog;
     private boolean mHasReadExternalPermission;
 
     @Override
@@ -74,25 +77,8 @@ public class ChoosePhotoActivity extends AppCompatActivity {
         mToolbar.setTitle(getString(R.string.choose_photos_title));
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
-        final String orderBy = MediaStore.Images.Media._ID;
-        Cursor imageCusor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            columns, null, null, orderBy);
-        int idColumnIndex = imageCusor.getColumnIndex(MediaStore.Images.Media._ID);
-        int dataColumnIndex = imageCusor.getColumnIndex(MediaStore.Images.Media.DATA);
-        int count = imageCusor.getCount();
-        for (int i = 0; i < count; i++) {
-            imageCusor.moveToPosition(i);
-            Bitmap bitmap = MediaStore.Images.Thumbnails
-                .getThumbnail(getContentResolver(), imageCusor.getInt(idColumnIndex),
-                    MediaStore.Images.Thumbnails.MICRO_KIND,
-                    null);
-            mListImageAll.add(new PhotoModel(imageCusor.getInt(idColumnIndex),
-                imageCusor.getString(dataColumnIndex), bitmap));
-        }
-        mPhotoAdapter = new PhotoAdapter(ChoosePhotoActivity.this, mListImageAll);
-        mGridViewPhoto.setAdapter(mPhotoAdapter);
-        imageCusor.close();
+        MyAsynTask myAsynTask = new MyAsynTask();
+        myAsynTask.execute();
     }
 
     private ArrayList getListPhotoSelected() {
@@ -120,7 +106,59 @@ public class ChoosePhotoActivity extends AppCompatActivity {
             Intent intent = new Intent(ChoosePhotoActivity.this, MakeVideoActivity.class);
             intent.putParcelableArrayListExtra(Constant.INTENT_DATA, getListPhotoSelected());
             startActivity(intent);
+            overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class MyAsynTask extends AsyncTask<Void, Integer, Void> {
+        @Override
+        protected void onPreExecute() {
+            mProgressDialog = new ProgressDialog(ChoosePhotoActivity.this);
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setMax(100);
+            mProgressDialog.setProgress(0);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setMessage(getString(R.string.get_image_progress));
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
+            final String orderBy = MediaStore.Images.Media._ID;
+            Cursor imageCusor =
+                getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    columns, null, null, orderBy);
+            int idColumnIndex = imageCusor.getColumnIndex(MediaStore.Images.Media._ID);
+            int dataColumnIndex = imageCusor.getColumnIndex(MediaStore.Images.Media.DATA);
+            int count = imageCusor.getCount();
+            for (int i = 0; i < count; i++) {
+                imageCusor.moveToPosition(i);
+                Bitmap bitmap = MediaStore.Images.Thumbnails
+                    .getThumbnail(getContentResolver(), imageCusor.getInt(idColumnIndex),
+                        MediaStore.Images.Thumbnails.MICRO_KIND,
+                        null);
+                mListImageAll.add(new PhotoModel(imageCusor.getInt(idColumnIndex),
+                    imageCusor.getString(dataColumnIndex), bitmap));
+                publishProgress((i + 1) * 100 / count);
+            }
+            if (imageCusor != null) {
+                imageCusor.close();
+            }
+            mPhotoAdapter = new PhotoAdapter(ChoosePhotoActivity.this, mListImageAll);
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            mProgressDialog.setProgress(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            mProgressDialog.dismiss();
+            mGridViewPhoto.setAdapter(mPhotoAdapter);
+        }
     }
 }

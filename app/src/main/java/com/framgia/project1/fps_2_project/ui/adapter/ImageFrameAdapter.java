@@ -60,4 +60,3 @@ public class ImageFrameAdapter extends PagerAdapter implements View.OnClickListe
         }
     }
 }
-

@@ -8,13 +8,17 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
@@ -25,14 +29,17 @@ import com.framgia.project1.fps_2_project.R;
 import com.framgia.project1.fps_2_project.data.model.PhotoModel;
 import com.framgia.project1.fps_2_project.data.model.Video;
 import com.framgia.project1.fps_2_project.data.remote.DataBaseRemote;
+import com.framgia.project1.fps_2_project.ui.adapter.VideoViewAdapter;
+import com.framgia.project1.fps_2_project.ui.mylistener.MyOnClickListener;
 import com.framgia.project1.fps_2_project.util.Constant;
 import com.framgia.project1.fps_2_project.util.VideoMaker;
 
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class MakeVideoActivity extends AppCompatActivity {
+public class MakeVideoActivity extends AppCompatActivity implements MyOnClickListener {
     private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 1;
     private ArrayList<PhotoModel> mImageSelected;
     private Toolbar mToolbar;
@@ -45,6 +52,10 @@ public class MakeVideoActivity extends AppCompatActivity {
     private AlertDialog.Builder mVideoNameDialog;
     private MediaController mMediaController;
     private DataBaseRemote mDataBaseRemote;
+    private RecyclerView mRecyclerView;
+    private VideoViewAdapter mVideoViewAdapter;
+    private List<Video> mListVideo = new ArrayList<>();
+    private boolean mIsSaved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +68,7 @@ public class MakeVideoActivity extends AppCompatActivity {
     private void init() {
         mImageSelected = getIntent().getParcelableArrayListExtra(Constant.INTENT_DATA);
         mHasWriteExternalPermission = false;
+        mIsSaved = false;
         mDataBaseRemote = new DataBaseRemote(this);
     }
 
@@ -82,6 +94,22 @@ public class MakeVideoActivity extends AppCompatActivity {
         showDialog();
     }
 
+    private void showOldListVideo() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.video_list);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        try {
+            mDataBaseRemote.openDataBase();
+            mListVideo = mDataBaseRemote.getListVideo();
+            mDataBaseRemote.closeDataBase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        mVideoViewAdapter = new VideoViewAdapter(MakeVideoActivity.this, mListVideo);
+        mVideoViewAdapter.setOnItemClickListener(this);
+        mRecyclerView.setAdapter(mVideoViewAdapter);
+    }
+
     private void showDialog() {
         mVideoNameDialog = new AlertDialog.Builder(MakeVideoActivity.this);
         mVideoNameDialog.setTitle(getString(R.string.enter_video_name));
@@ -104,8 +132,15 @@ public class MakeVideoActivity extends AppCompatActivity {
                             R.string.video_exist, Toast.LENGTH_LONG).show();
                         showDialog();
                     } else {
-                        MakeVideoAsynTask makeVideoAsynTask = new MakeVideoAsynTask();
-                        makeVideoAsynTask.execute(videoName);
+                        File outPutFile =
+                            new File(Environment.getExternalStorageDirectory(),
+                                videoName + VideoMaker.VIDEO_OUTPUT_TYPE);
+                        mVideoPath = outPutFile.getAbsolutePath();
+                        mVideoMaker =
+                            new VideoMaker(MakeVideoActivity.this, mImageSelected, videoName,
+                                mVideoView, mProgressDialog);
+                        mVideoMaker.makeVideo();
+                        showOldListVideo();
                     }
                     mDataBaseRemote.closeDataBase();
                 } catch (SQLException e) {
@@ -166,12 +201,15 @@ public class MakeVideoActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.save_video) {
+        if (id == R.id.save_video && !mIsSaved) {
             checkPermission();
             try {
                 mDataBaseRemote.openDataBase();
                 Video video = new Video(mEditVideoName.getText().toString(), mVideoPath);
+                mListVideo.add(video);
+                mVideoViewAdapter.notifyItemChanged(mListVideo.size() - 1);
                 mDataBaseRemote.insertVideo(video);
+                mIsSaved = true;
                 mDataBaseRemote.closeDataBase();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -181,7 +219,7 @@ public class MakeVideoActivity extends AppCompatActivity {
                 .LENGTH_LONG).show();
         }
         if (id == android.R.id.home) {
-            if (mVideoPath != null) {
+            if (mVideoPath != null && !mIsSaved) {
                 DeleteVideoAsynTask deleteVideoAsynTask = new DeleteVideoAsynTask();
                 deleteVideoAsynTask.execute(mVideoPath);
             }
@@ -190,28 +228,11 @@ public class MakeVideoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class MakeVideoAsynTask extends AsyncTask<String, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            mProgressDialog = new ProgressDialog(MakeVideoActivity.this);
-            mProgressDialog.setCancelable(false);
-            mProgressDialog.setMessage(getString(R.string.exporting_video));
-            mProgressDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(String... params) {
-            mVideoMaker = new VideoMaker(MakeVideoActivity.this, mImageSelected, params[0]);
-            mVideoPath = mVideoMaker.makeVideo();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            mProgressDialog.dismiss();
-            mVideoView.setVideoPath(mVideoPath);
-            mVideoView.start();
-        }
+    @Override
+    public void onItemClick(View view, int position) {
+        mVideoView.setMediaController(null);
+        mVideoView.setVideoPath(mListVideo.get(position).getVideoPath());
+        mVideoView.start();
     }
 
     private class DeleteVideoAsynTask extends AsyncTask<String, Void, Void> {

@@ -77,5 +77,6 @@ public class ChooseFrameActivity extends AppCompatActivity implements MyOnClickL
         Intent intent = new Intent(ChooseFrameActivity.this, MergeImageActivity.class);
         intent.putExtra(Constant.INTENT_DATA, mImageIds[position]);
         startActivity(intent);
+        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
     }
 }

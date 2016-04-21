@@ -14,6 +14,8 @@ import com.framgia.project1.fps_2_project.R;
  */
 public class ImageSlideAdapter extends PagerAdapter {
     public static final int IMAGE_COUNT = 5;
+    public static final int[] mImageIds = {R.drawable.slide1, R.drawable.slide2, R.drawable
+        .slide3, R.drawable.slide4, R.drawable.slide5};
     private Context mContext;
     public ImageSlideAdapter(Context context) {
         this.mContext = context;
@@ -32,7 +34,8 @@ public class ImageSlideAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.vp_image, container, false);
         ImageView imageView = (ImageView) view.findViewById(R.id.image_display);
-        imageView.setImageResource(R.drawable.logo);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setImageResource(mImageIds[position]);
         container.addView(view);
         return view;
     }

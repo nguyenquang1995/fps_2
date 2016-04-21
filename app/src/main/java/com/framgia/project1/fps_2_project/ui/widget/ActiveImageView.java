@@ -22,6 +22,8 @@ public class ActiveImageView extends View {
     private PointF mMid = new PointF();
     private int mMode = NONE;
     private float mOldDist = 1f;
+    private float mSumMoveX = 0;
+    private float mSumMoveY = 0;
 
     public ActiveImageView(Context context) {
         super(context);
@@ -61,6 +63,8 @@ public class ActiveImageView extends View {
                     mMatrix.set(mSavedMatrix);
                     float diffX = event.getX() - mStart.x;
                     float diffY = event.getY() - mStart.y;
+                    mSumMoveX += diffX;
+                    mSumMoveY += diffY;
                     mMatrix.postTranslate(diffX, diffY);
                     break;
                 }
@@ -90,5 +94,10 @@ public class ActiveImageView extends View {
 
     public void setImageBitmap(Bitmap b) {
         mImgBitmap = b;
+    }
+
+    public void returnOldPosition() {
+        mMatrix = new Matrix();
+        invalidate();
     }
 }

@@ -103,4 +103,29 @@ public class DataBaseRemote implements Constant {
         }
         return false;
     }
+
+    public boolean searchImage(String imageName) {
+        String query = COLUMN_IMAGE_NAME + " = '" + imageName + "'";
+        Cursor cursor = mDataBase.query(TABLE_IMAGE, null, query, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            cursor.close();
+            return true;
+        }
+        return false;
+    }
+
+    public List<Video> getListVideo() {
+        String query = "select * from " + TABLE_VIDEO;
+        Cursor cursor = mDataBase.rawQuery(query, null);
+        List<Video> videoList = new ArrayList<>();
+        if(cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                videoList.add(new Video(cursor));
+                cursor.moveToNext();
+            }
+            cursor.close();
+        }
+        return videoList;
+    }
 }

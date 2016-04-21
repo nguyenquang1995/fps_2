@@ -1,5 +1,6 @@
 package com.framgia.project1.fps_2_project.util;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -8,9 +9,11 @@ import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
 import android.media.MediaFormat;
 import android.media.MediaMuxer;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.view.Surface;
 import android.view.WindowManager;
+import android.widget.VideoView;
 
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
@@ -44,9 +47,9 @@ public class VideoMaker {
     private static final int TIME_OUT_USEC = 2500;
     private static final int NUM_EFFECT = 3;
     private static final float MAX_DELTA_SCALE = 0.5f;
-    private static final float ONE_ROUND = 360;
+    private static final float HALF_ROUND = 180;
     private static final long PRESENTATION_TIME = 1000000L;
-    private static final String VIDEO_OUTPUT_TYPE = ".mp4";
+    public static final String VIDEO_OUTPUT_TYPE = ".mp4";
     private static final String EXCEPTION_FORMAT = "format changed twice";
     private static final String EXCEPTION_NULL = "data was null";
     private static final String EXCEPTION_NOT_START = "muxer has not started";
@@ -73,11 +76,16 @@ public class VideoMaker {
     private int mOldIndex;
     private boolean mInitFinish;
     private String mVideoName;
+    private ProgressDialog mProgressDialog;
+    private VideoView mVideoView;
 
-    public VideoMaker(Context context, ArrayList<PhotoModel> listImage, String videoName) {
+    public VideoMaker(Context context, ArrayList<PhotoModel> listImage, String videoName,
+                      VideoView videoView, ProgressDialog progressDialog) {
         mContext = context;
         mListImage = listImage;
         mVideoName = videoName;
+        mVideoView = videoView;
+        mProgressDialog = progressDialog;
         try {
             init(videoName);
         } catch (IOException e) {
@@ -85,32 +93,9 @@ public class VideoMaker {
         }
     }
 
-    public String makeVideo() {
-        try {
-            int maxFrame = FRAMES_PER_SECOND * mListImage.size() * SECOND_PER_IMAGE;
-            for (int i = 0; i < maxFrame; i++) {
-                encode(false);
-                while (!mInitFinish) {
-                    initFrame(i);
-                }
-                mInitFinish = false;
-            }
-            encode(true);
-        } finally {
-            release();
-        }
-        String videoFile = "";
-        try {
-            File outPutFile =
-                new File(Environment.getExternalStorageDirectory(), mVideoName + VIDEO_OUTPUT_TYPE);
-            videoFile =
-                addAudio(mOutPutFile.getAbsolutePath(), getAudioFile(MUSIC_NAME, R.raw.my_music),
-                    outPutFile.getAbsolutePath());
-            mOutPutFile.delete();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return videoFile;
+    public void makeVideo() {
+        MakeVideoAsynTask makeVideoAsynTask = new MakeVideoAsynTask();
+        makeVideoAsynTask.execute();
     }
 
     private void init(String videoName) throws IOException {
@@ -243,7 +228,7 @@ public class VideoMaker {
         } else if (typeEffect == 2) {
             VideoEffects.rotate(canvas, mBitmaps, mCurrentIndex, mOldIndex, mDeltaRotate, paint,
                 mScreenWidth, mScreenHeight);
-            mDeltaRotate += VideoEffects.computeDeltaRotate(ONE_ROUND);
+            mDeltaRotate += VideoEffects.computeDeltaRotate(HALF_ROUND);
         }
         mInputSurface.unlockCanvasAndPost(canvas);
         mInitFinish = true;
@@ -339,5 +324,63 @@ public class VideoMaker {
             }
         }
         return musicSource.getAbsolutePath();
+    }
+
+    private class MakeVideoAsynTask extends AsyncTask<String, Integer, String> {
+        @Override
+        protected void onPreExecute() {
+            mProgressDialog = new ProgressDialog(mContext);
+            mProgressDialog.setMax(100);
+            mProgressDialog.setProgress(0);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setMessage(mContext.getString(R.string.exporting_video));
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                int maxFrame = FRAMES_PER_SECOND * mListImage.size() * SECOND_PER_IMAGE;
+                for (int i = 0; i < maxFrame; i++) {
+                    encode(false);
+                    while (!mInitFinish) {
+                        initFrame(i);
+                    }
+                    mInitFinish = false;
+                    publishProgress(i * 100 / maxFrame);
+                }
+                encode(true);
+            } finally {
+                release();
+            }
+            String videoFile = "";
+            try {
+                File outPutFile =
+                    new File(Environment.getExternalStorageDirectory(),
+                        mVideoName + VIDEO_OUTPUT_TYPE);
+                videoFile =
+                    addAudio(mOutPutFile.getAbsolutePath(),
+                        getAudioFile(MUSIC_NAME, R.raw.my_music),
+                        outPutFile.getAbsolutePath());
+                mOutPutFile.delete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return videoFile;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            mProgressDialog.setProgress(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            mProgressDialog.dismiss();
+            mVideoView.setVideoPath(s);
+            mVideoView.start();
+        }
     }
 }

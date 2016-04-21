@@ -18,6 +18,13 @@
 
     <VideoView
         android:id="@+id/video_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/video_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/video_padding"
+        android:padding="@dimen/video_padding"/>
 </LinearLayout>

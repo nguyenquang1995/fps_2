@@ -55,9 +55,9 @@ public class VideoEffects {
         Matrix matrix = new Matrix();
         matrix.setRotate(deltaRotate);
         if (oldIndex != INVALID_INDEX) {
-            canvas.drawBitmap(bitmaps.get(oldIndex), 0, 0, paint);
+            canvas.drawBitmap(bitmaps.get(currentIndex), 0, 0, paint);
         }
-        canvas.drawBitmap(bitmaps.get(currentIndex), matrix, paint);
+        canvas.drawBitmap(bitmaps.get(oldIndex), matrix, paint);
     }
 
     public static float computeDeltaRotate(float x0) {

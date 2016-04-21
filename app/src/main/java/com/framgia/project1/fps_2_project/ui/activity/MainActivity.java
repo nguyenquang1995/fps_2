@@ -1,15 +1,21 @@
 package com.framgia.project1.fps_2_project.ui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -34,8 +40,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements Constant {
+    private static final int TIME_DELAY = 4000;
+    private static final int MY_PERMISSIONS_USE_CAMERA = 1;
     private static final int FUNCTION_MERGEPHOTO = 1;
     private static final int FUNCTION_MAKEVIDEO = 2;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
@@ -82,8 +92,7 @@ public class MainActivity extends AppCompatActivity implements Constant {
         findViewById(R.id.button_take_photo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                checkPermission();
             }
         });
         findViewById(R.id.button_sketch).setOnClickListener(new View.OnClickListener() {
@@ -91,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements Constant {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, EditImageActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
             }
         });
         mMergePhotoButton = (ImageButton) findViewById(R.id.button_merge_image);
@@ -99,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements Constant {
             public void onClick(View v) {
                 mTypeFunction = FUNCTION_MERGEPHOTO;
                 startActivity(new Intent(MainActivity.this, ChooseFrameActivity.class));
+                overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
             }
         });
         mMakeVideoButton = (ImageButton) findViewById(R.id.button_make_video);
@@ -107,8 +118,41 @@ public class MainActivity extends AppCompatActivity implements Constant {
             public void onClick(View v) {
                 mTypeFunction = FUNCTION_MAKEVIDEO;
                 startActivity(new Intent(MainActivity.this, ChoosePhotoActivity.class));
+                overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
             }
         });
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new PageViewAutoAsynTask().execute();
+            }
+        }, TIME_DELAY);
+    }
+
+    private void checkPermission() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission
+            .CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            return;
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission
+            .CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]
+                    {Manifest.permission.CAMERA},
+                MY_PERMISSIONS_USE_CAMERA);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_USE_CAMERA
+            && grantResults.length > 0
+            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+        }
     }
 
     private void selectImage() {
@@ -205,5 +249,27 @@ public class MainActivity extends AppCompatActivity implements Constant {
             .build();
         mShareDialog.show(content);
         startActivity(new Intent(MainActivity.this, ChooseFrameActivity.class));
+    }
+
+    private class PageViewAutoAsynTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (mViewPager.getCurrentItem() < ImageSlideAdapter.IMAGE_COUNT - 1) {
+                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
+            } else {
+                mViewPager.setCurrentItem(0);
+            }
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    new PageViewAutoAsynTask().execute();
+                }
+            }, TIME_DELAY);
+        }
     }
 }

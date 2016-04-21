@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.framgia.project1.fps_2_project.R;
 
 public class SplashScreen extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 1000;
+    public static int SPLASH_TIME_OUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
