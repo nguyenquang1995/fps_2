@@ -10,4 +10,6 @@
     <color name="colorButtonMakeVideo">#9575CD</color>
     <color name="result_border">#dddddd</color>
     <color name="result_background">#f0f0f0</color>
+    <color name="button_normal">#212121</color>
+    <color name="button_pressed">#424242</color>
 </resources>

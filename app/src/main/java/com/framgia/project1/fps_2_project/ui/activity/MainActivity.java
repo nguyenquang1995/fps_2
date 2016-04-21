@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements Constant {
             @Override
             public void onClick(View v) {
                 mTypeFunction = FUNCTION_MERGEPHOTO;
+                startActivity(new Intent(MainActivity.this, ChooseFrameActivity.class));
             }
         });
         mMakeVideoButton = (ImageButton) findViewById(R.id.button_make_video);
@@ -203,5 +204,6 @@ public class MainActivity extends AppCompatActivity implements Constant {
             .addPhoto(photo)
             .build();
         mShareDialog.show(content);
+        startActivity(new Intent(MainActivity.this, ChooseFrameActivity.class));
     }
 }

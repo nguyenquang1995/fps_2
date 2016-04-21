@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.framgia.project1.fps_2_project.ui.activity.MergeImageActivity">
+
+    <FrameLayout
+        android:id="@+id/image_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9">
+
+        <ImageView
+            android:id="@+id/background_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.framgia.project1.fps_2_project.ui.widget.ActiveImageView
+            android:id="@+id/sub_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/background_dark"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_save"
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="1"
+            android:background="@drawable/custom_icon_button"
+            android:src="@drawable/ic_save_white_48dp"/>
+
+        <ImageButton
+            android:id="@+id/button_add_image"
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="1"
+            android:background="@drawable/custom_icon_button"
+            android:src="@drawable/ic_burst_mode_white_48dp"/>
+
+        <ImageButton
+            android:id="@+id/button_crop"
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="1"
+            android:background="@drawable/custom_icon_button"
+            android:src="@drawable/ic_crop_white_48dp"/>
+
+        <ImageButton
+            android:id="@+id/button_transform"
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="1"
+            android:background="@drawable/custom_icon_button"
+            android:src="@drawable/ic_account_circle_white_48dp"/>
+    </LinearLayout>
+</LinearLayout>

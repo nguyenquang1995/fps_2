@@ -70,4 +70,7 @@
     <string name="testing">Testing</string>
     <string name="select">Select File</string>
     <string name="meadia_type">video/*,image/*</string>
+    <string name="merge_guide">Please choose one frame to make beautiful picture</string>
+    <string name="end_view_page">The final background frame</string>
+    <string name="start_view_page">The first background frame</string>
 </resources>
