@@ -103,4 +103,13 @@
     <string name="main_action_crop">CROP</string>
     <string name="main_action_rotate">Rotate 90 degrees clockwise</string>
     <string name="video_exist">This name exist ! Enter other name</string>
+    <string name="image_exist">Image name exist! please choose other name </string>
+    <string name="save">Save</string>
+    <string name="pick_image">Pick Image</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="back_old">Return</string>
+    <string name="square">Square</string>
+    <string name="circle">Circle</string>
+    <string name="image_dialog_title">Enter image name</string>
 </resources>

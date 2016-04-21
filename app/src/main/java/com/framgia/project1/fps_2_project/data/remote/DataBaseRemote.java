@@ -103,4 +103,14 @@ public class DataBaseRemote implements Constant {
         }
         return false;
     }
+
+    public boolean searchImage(String imageName) {
+        String query = COLUMN_IMAGE_NAME + " = '" + imageName + "'";
+        Cursor cursor = mDataBase.query(TABLE_IMAGE, null, query, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            cursor.close();
+            return true;
+        }
+        return false;
+    }
 }

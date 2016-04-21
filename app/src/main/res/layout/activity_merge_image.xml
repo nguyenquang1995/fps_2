@@ -11,7 +11,7 @@
         android:id="@+id/image_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="9">
+        android:layout_weight="8">
 
         <ImageView
             android:id="@+id/background_image"
@@ -25,42 +25,189 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/layout_tool_get"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@android:color/background_dark"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/button_save"
+        <LinearLayout
             android:layout_width="@dimen/buttom_size"
             android:layout_height="@dimen/buttom_size"
             android:layout_weight="1"
             android:background="@drawable/custom_icon_button"
-            android:src="@drawable/ic_save_white_48dp"/>
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/button_add_image"
-            android:layout_width="@dimen/buttom_size"
-            android:layout_height="@dimen/buttom_size"
-            android:layout_weight="1"
-            android:background="@drawable/custom_icon_button"
-            android:src="@drawable/ic_burst_mode_white_48dp"/>
+            <ImageButton
+                android:id="@+id/button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/custom_icon_button"
+                android:src="@drawable/ic_save_white_48dp"/>
 
-        <ImageButton
-            android:id="@+id/button_crop"
-            android:layout_width="@dimen/buttom_size"
-            android:layout_height="@dimen/buttom_size"
-            android:layout_weight="1"
-            android:background="@drawable/custom_icon_button"
-            android:src="@drawable/ic_crop_white_48dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/save"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/button_transform"
+        <LinearLayout
             android:layout_width="@dimen/buttom_size"
             android:layout_height="@dimen/buttom_size"
             android:layout_weight="1"
             android:background="@drawable/custom_icon_button"
-            android:src="@drawable/ic_account_circle_white_48dp"/>
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button_add_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/custom_icon_button"
+                android:src="@drawable/ic_burst_mode_white_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/pick_image"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_tool_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/background_dark"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="1"
+            android:background="@drawable/custom_icon_button"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/custom_icon_button"
+                android:src="@drawable/ic_done_white_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/done"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="1"
+            android:background="@drawable/custom_icon_button"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/custom_icon_button"
+                android:src="@drawable/ic_cancel_white_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/cancel"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="1"
+            android:background="@drawable/custom_icon_button"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/custom_icon_button"
+                android:src="@drawable/ic_restore_white_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/back_old"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="1"
+            android:background="@drawable/custom_icon_button"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button_crop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/custom_icon_button"
+                android:src="@drawable/ic_crop_square_white_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/square"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/buttom_size"
+            android:layout_height="@dimen/buttom_size"
+            android:layout_weight="1"
+            android:background="@drawable/custom_icon_button"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button_transform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/custom_icon_button"
+                android:src="@drawable/ic_account_circle_white_48dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/circle"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
