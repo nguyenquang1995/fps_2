@@ -56,6 +56,9 @@
             android:authorities="com.facebook.app.FacebookContentProvider1705159863029321"
             android:exported="true"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <activity
+            android:name=".ui.activity.MakeVideoActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
