@@ -102,4 +102,5 @@
     </string-array>
     <string name="main_action_crop">CROP</string>
     <string name="main_action_rotate">Rotate 90 degrees clockwise</string>
+    <string name="video_exist">This name exist ! Enter other name</string>
 </resources>

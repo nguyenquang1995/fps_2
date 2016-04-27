@@ -78,7 +78,7 @@ public class DataBaseRemote implements Constant {
         long result = -1;
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_VIDEO_NAME, video.getVideoName());
-        contentValues.put(COLUMN_IMAGE_PATH, video.getVideoPath());
+        contentValues.put(COLUMN_VIDEO_PATH, video.getVideoPath());
         result = mDataBase.insertOrThrow(TABLE_VIDEO, null, contentValues);
         return result;
     }
@@ -92,5 +92,15 @@ public class DataBaseRemote implements Constant {
             cursor.moveToFirst();
         }
         return cursor;
+    }
+
+    public boolean searchVideo(String videoName) {
+        String query = COLUMN_VIDEO_NAME + " = '" + videoName + "'";
+        Cursor cursor = mDataBase.query(TABLE_VIDEO, null, query, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            cursor.close();
+            return true;
+        }
+        return false;
     }
 }
