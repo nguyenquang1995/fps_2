@@ -1,4 +1,5 @@
 <resources>
+    <string name="facebook_app_id">1705159863029321</string>
     <string name="app_name">FPS</string>
     <string name="action_done">Done</string>
     <string name="txt_image_slider">Image Slideshow</string>
@@ -36,6 +37,7 @@
     <string name="contrast">contrast</string>
     <string name="first_color">first_color</string>
     <string name="second_color">second_color</string>
+    <string name="third_color">third_color</string>
     <string name="vertical">vertical</string>
     <string name="horizontal">horizontal</string>
     <string name="strength">strength</string>
@@ -52,4 +54,20 @@
     <string name="enter_video_name">Enter video name</string>
     <string name="dialog_positive_button_name">OK</string>
     <string name="dialog_negative_button_name">Cancel</string>
+    <string name="gl_attach_shader">glAttachShader</string>
+    <string name="save_image_title">SAVE IMAGE</string>
+    <string name="save_button">SAVE</string>
+    <string name="cancel_button">CANCEL</string>
+    <string name="save_image_message">Enter name</string>
+    <string name="notice_save">Save successful</string>
+    <string name="list_field">id,name,email,picture.width(120).height(120)</string>
+    <string name="permission_facebook">email,publish_actions</string>
+    <string name="title_share_facebook">Select Photo!</string>
+    <string name="url">url</string>
+    <string name="data">data</string>
+    <string name="jpg">.jpg</string>
+    <string name="png">.png</string>
+    <string name="testing">Testing</string>
+    <string name="select">Select File</string>
+    <string name="meadia_type">video/*,image/*</string>
 </resources>

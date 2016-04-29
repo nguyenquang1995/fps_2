@@ -9,143 +9,181 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.framgia.project1.fps_2_project.ui.activity.EditImageActivity">
+
     <android.opengl.GLSurfaceView
         android:id="@+id/effectsview"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.93" />
-<HorizontalScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <LinearLayout
-        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnSave"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/scrollView"/>
+
+    <HorizontalScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+        android:orientation="horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/none"
-            android:id="@+id/none"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/brightness"
-            android:id="@+id/brightness"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/autofix"
-            android:id="@+id/autofix"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bw"
-            android:id="@+id/bw"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/grayscale"
-            android:id="@+id/grayscale"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/contrast"
-            android:id="@+id/contrast"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/filllight"
-            android:id="@+id/filllight"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/documentary"
-            android:id="@+id/documentary"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/crossprocess"
-            android:id="@+id/crossprocess"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fliphor"
-            android:id="@+id/fliphor"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/grain"
-            android:id="@+id/grain"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/vignette"
-            android:id="@+id/vignette"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/duotone"
-            android:id="@+id/duotone"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lomoish"
-            android:id="@+id/lomoish"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fisheye"
-            android:id="@+id/fisheye"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/flipvert"
-            android:id="@+id/flipvert"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/temperature"
-            android:id="@+id/temperature"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rotate"
-            android:id="@+id/rotate"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/saturate"
-            android:id="@+id/saturate"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sepia"
-            android:id="@+id/sepia"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/negative"
-            android:id="@+id/negative"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sharpen"
-            android:id="@+id/sharpen"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/posterize"
-            android:id="@+id/posterize"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tint"
-            android:id="@+id/tint"/>
-    </LinearLayout>
-</HorizontalScrollView>
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/none"/>
+
+            <Button
+                android:id="@+id/brightness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/brightness"/>
+
+            <Button
+                android:id="@+id/autofix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/autofix"/>
+
+            <Button
+                android:id="@+id/bw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bw"/>
+
+            <Button
+                android:id="@+id/grayscale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grayscale"/>
+
+            <Button
+                android:id="@+id/contrast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contrast"/>
+
+            <Button
+                android:id="@+id/filllight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filllight"/>
+
+            <Button
+                android:id="@+id/documentary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/documentary"/>
+
+            <Button
+                android:id="@+id/crossprocess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crossprocess"/>
+
+            <Button
+                android:id="@+id/fliphor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fliphor"/>
+
+            <Button
+                android:id="@+id/grain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grain"/>
+
+            <Button
+                android:id="@+id/vignette"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vignette"/>
+
+            <Button
+                android:id="@+id/duotone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/duotone"/>
+
+            <Button
+                android:id="@+id/lomoish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lomoish"/>
+
+            <Button
+                android:id="@+id/fisheye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fisheye"/>
+
+            <Button
+                android:id="@+id/flipvert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flipvert"/>
+
+            <Button
+                android:id="@+id/temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/temperature"/>
+
+            <Button
+                android:id="@+id/rotate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rotate"/>
+
+            <Button
+                android:id="@+id/saturate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saturate"/>
+
+            <Button
+                android:id="@+id/sepia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sepia"/>
+
+            <Button
+                android:id="@+id/negative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/negative"/>
+
+            <Button
+                android:id="@+id/sharpen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sharpen"/>
+
+            <Button
+                android:id="@+id/posterize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/posterize"/>
+
+            <Button
+                android:id="@+id/tint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tint"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/btnSave"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/save_button"/>
 
 </RelativeLayout>

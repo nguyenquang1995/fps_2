@@ -2,7 +2,7 @@ package com.framgia.project1.fps_2_project.ui.widget;
 
 import android.opengl.GLES20;
 
-import com.framgia.project1.fps_2_project.ui.data.model.Constant;
+import com.framgia.project1.fps_2_project.data.model.Constant;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -11,7 +11,7 @@ import java.nio.FloatBuffer;
 /**
  * Created by nguyenxuantung on 19/04/2016.
  */
-public class TextureRenderer implements Constant{
+public class TextureRenderer implements Constant {
     private int mProgram;
     private int mTexSamplerHandle;
     private int mTexCoordHandle;

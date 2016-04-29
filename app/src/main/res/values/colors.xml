@@ -8,4 +8,6 @@
     <color name="colorButtonTakePhoto">#FF9800</color>
     <color name="colorButtonMergePhoto">#00B0FF</color>
     <color name="colorButtonMakeVideo">#9575CD</color>
+    <color name="result_border">#dddddd</color>
+    <color name="result_background">#f0f0f0</color>
 </resources>
