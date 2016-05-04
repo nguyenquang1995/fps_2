@@ -6,7 +6,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
-    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
 
@@ -29,9 +31,11 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".ui.activity.EditImageActivity">
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <activity android:name=".ui.activity.EditImageActivity"/>
+        <activity
+            android:name=".ui.activity.ChoosePhotoActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".ui.activity.MainActivity"/>
     </application>
 
 </manifest>
