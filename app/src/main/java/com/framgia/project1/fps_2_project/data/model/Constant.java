@@ -1,4 +1,4 @@
-package com.framgia.project1.fps_2_project.ui.data.model;
+package com.framgia.project1.fps_2_project.data.model;
 
 /**
  * Created by nguyenxuantung on 20/04/2016.
@@ -28,4 +28,15 @@ public interface Constant {
     public static final String SETUP_VERTEX="vertex attribute setup";
     public static final String ACTIVE_TEXTURE="glActiveTexture";
     public static final String BIND_TEXTURE="glBindTexture";
+    public static final String TABLE_IMAGE= "tblImage";
+    public static final String TABLE_VIDEO= "tblVideo";
+    //columns of tblImage
+    public static final String COLUMN_ID= "id";
+    public static final String COLUMN_IMAGE_NAME= "image_name";
+    public static final String COLUMN_IMAGE_PATH= "image_path";
+    public static final String COLUMN_IMAGE_LIKE= "image_like";
+    //columns of tblVideo
+    public static final String COLUMN_VIDEO_NAME = "video_name";
+    public static final String COLUMN_VIDEO_PATH = "video_path";
+    public static final String[] LIST_ITEM_FACEBOOK= { "Take Photo", "Choose from Library","Cancel" };
 }

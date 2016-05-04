@@ -6,9 +6,9 @@ package com.framgia.project1.fps_2_project.ui.widget;
 
 import android.opengl.GLES20;
 
-import com.framgia.project1.fps_2_project.ui.data.model.Constant;
+import com.framgia.project1.fps_2_project.data.model.Constant;
 
-public class GLToolbox implements Constant{
+public class GLToolbox implements Constant {
     public static int loadShader(int shaderType, String source) {
         int shader = GLES20.glCreateShader(shaderType);
         if (shader != 0) {
