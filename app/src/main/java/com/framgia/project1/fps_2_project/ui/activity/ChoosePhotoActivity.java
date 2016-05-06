@@ -94,34 +94,37 @@ public class ChoosePhotoActivity extends AppCompatActivity {
         mGridViewPhoto.setAdapter(mPhotoAdapter);
         imageCusor.close();
     }
-        private ArrayList getListPhotoSelected () {
-            ArrayList photoSelected = new ArrayList();
-            int count = mListImageAll.size();
-            for (int i = 0; i < count; i++) {
-                if (mListImageAll.get(i).isSelected()) {
-                    photoSelected.add(mListImageAll.get(i));
-                }
+
+    private ArrayList getListPhotoSelected() {
+        ArrayList photoSelected = new ArrayList();
+        int count = mListImageAll.size();
+        for (int i = 0; i < count; i++) {
+            if (mListImageAll.get(i).isSelected()) {
+                photoSelected.add(mListImageAll.get(i));
             }
-            return photoSelected;
         }
-        @Override
-        public boolean onCreateOptionsMenu (Menu menu){
-            // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_choose_photo, menu);
-            return true;
-        }
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_done) {
-                /*Intent intent = new Intent(ChoosePhotoActivity.this, MakeVideoActivity.class);
-                intent.putParcelableArrayListExtra(Constant.INTENT_DATA, getListPhotoSelected());
-                startActivity(intent);*/
-            }
-            return super.onOptionsItemSelected(item);
-        }
+        return photoSelected;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_choose_photo, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_done) {
+            Intent intent = new Intent(ChoosePhotoActivity.this, MakeVideoActivity.class);
+            intent.putParcelableArrayListExtra(Constant.INTENT_DATA, getListPhotoSelected());
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
