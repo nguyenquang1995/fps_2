@@ -39,4 +39,16 @@ public interface Constant {
     public static final String COLUMN_VIDEO_NAME = "video_name";
     public static final String COLUMN_VIDEO_PATH = "video_path";
     public static final String[] LIST_ITEM_FACEBOOK= { "Take Photo", "Choose from Library","Cancel" };
+    public static final int CIRCULAR_CONS = 0;
+    public static final int RECT_CONS  = 1;
+    public static final int MIN_MAX_OVERRIDE_CONS  = 2;
+    public static final int CUSTOMIZED_OVERLAY_CONS  = 3;
+    public static final int GUIDE_LINES_CONS  = 4;
+    public static final int SCALE_TYPE_CONS  = 5;
+    public static final int FIX_ASPECT_RATIO_CONS  = 6;
+    public static final int AUTO_ZOOM_CONS  = 7;
+    public static final int MAX_ZOOM_CONS  = 8;
+    public static final int INIT_CROP_CONS  = 9;
+    public static final int RESET_CROP_CONS  = 10;
+    public static final int OVER_lAY_CONS  = 11;
 }

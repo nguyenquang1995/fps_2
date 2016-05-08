@@ -41,6 +41,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class EditImageActivity extends AppCompatActivity implements GLSurfaceView.Renderer,
     View.OnClickListener {
+    public static Bitmap sBitmap;
     protected boolean checkSave = false;
     Button mButNone, mButAutofix, mButbw, mButbrightness, mButcontrast, mButcrossprocess,
         mButdocumentary, mButduotone, mButfilllight, mButfisheye, mButflipvert, mButfliphor,
