@@ -11,10 +11,9 @@
     <dimen name="photo_gridview_size">100dp</dimen>
     <dimen name="gridview_spacing">10dp</dimen>
     <dimen name="video_size">300dp</dimen>
-
+    <dimen name="height_100">100dp</dimen>
     <dimen name="button_size">100dp</dimen>
     <!-- facebook sizes -->
-
     <dimen name="example_list_height">40dp</dimen>
     <dimen name="example_list_text_size">16dp</dimen>
     <dimen name="example_list_title_size">20dp</dimen>
@@ -25,5 +24,9 @@
     <dimen name="custom_dialog_height">40dp</dimen>
     <dimen name="layout_300">300dp</dimen>
     <dimen name="margin_67">67dp</dimen>
-
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="text_size">14sp</dimen>
+    <dimen name="dimen_0">0dp</dimen>
+    <dimen name="dimen_5">5dp</dimen>
+    <dimen name="dimen_1">1dp</dimen>
 </resources>

@@ -66,11 +66,40 @@
     <string name="url">url</string>
     <string name="data">data</string>
     <string name="jpg">.jpg</string>
+    <string name="unknown_preset">Unknown preset: </string>
+    <string name="demo_preset">DEMO_PRESET</string>
+    <string name="load_fail">Image load failed: </string>
+    <string name="load_successful">Image load successful: </string>
     <string name="png">.png</string>
+    <string name="crop_failed">Image crop failed: </string>
     <string name="testing">Testing</string>
+    <string name="notice_permissions">Cancelling, required permissions are not granted</string>
     <string name="select">Select File</string>
     <string name="meadia_type">video/*,image/*</string>
     <string name="merge_guide">Please choose one frame to make beautiful picture</string>
     <string name="end_view_page">The final background frame</string>
     <string name="start_view_page">The first background frame</string>
+    <string name="drawer_option_toggle_scale">Image Scale: %1s</string>
+    <string name="drawer_option_toggle_shape">Crop Shape: %1s</string>
+    <string name="drawer_option_toggle_guidelines">Guidelines: %1s</string>
+    <string name="drawer_option_toggle_aspect_ratio">%1s</string>
+    <string name="drawer_option_toggle_auto_zoom">Auto zoom: %1s</string>
+    <string name="drawer_option_toggle_max_zoom">Max zoom level: %1s</string>
+    <string name="drawer_option_toggle_show_overlay">Show Overlay: %1s</string>
+    <string-array name="list_option">
+        <item>Circular</item>
+        <item>Rectangular</item>
+        <item>Min/Max limits override</item>
+        <item>Customized Overlay</item>
+        <item>Guidelines: %1s</item>
+        <item>Image Scale: %1s</item>
+        <item>Aspect Ratio: %1s</item>
+        <item>Auto zoom: %1s</item>
+        <item>Max zoom level: %1s</item>
+        <item>Set initial crop rectangle</item>
+        <item>Reset crop rectangle to initial</item>
+        <item>Show Overlay: %1s</item>
+    </string-array>
+    <string name="main_action_crop">CROP</string>
+    <string name="main_action_rotate">Rotate 90 degrees clockwise</string>
 </resources>

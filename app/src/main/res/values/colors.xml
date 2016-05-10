@@ -12,4 +12,7 @@
     <color name="result_background">#f0f0f0</color>
     <color name="button_normal">#212121</color>
     <color name="button_pressed">#424242</color>
+    <color name="text_color_promary">#ffffff</color>
+    <color name="back_ground">#FF2259</color>
+    <color name="crop_back_ground">#88AA66CC</color>
 </resources>
