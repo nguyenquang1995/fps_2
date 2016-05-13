@@ -1,6 +1,7 @@
 package com.framgia.project1.fps_2_project.ui.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.widget.GridView;
 import com.framgia.project1.fps_2_project.R;
 import com.framgia.project1.fps_2_project.data.model.PhotoModel;
 import com.framgia.project1.fps_2_project.ui.adapter.PhotoAdapter;
+import com.framgia.project1.fps_2_project.util.Constant;
 
 import java.util.ArrayList;
 
@@ -113,6 +115,12 @@ public class ChoosePhotoActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_done) {
+            Intent intent = new Intent(ChoosePhotoActivity.this, MakeVideoActivity.class);
+            intent.putParcelableArrayListExtra(Constant.INTENT_DATA, getListPhotoSelected());
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 }
